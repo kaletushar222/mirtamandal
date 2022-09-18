@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 
 
-class InvoiceForm extends React.Component {
+class ComponentInvoiceForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,7 +14,8 @@ class InvoiceForm extends React.Component {
             amount : 0,
             isPending : false,
             remarks : "",
-            contributorType:"LOCAL"
+            contributorType:"LOCAL",
+            validated : false
         }
     }
 
@@ -40,20 +41,34 @@ class InvoiceForm extends React.Component {
         this.setState(updatedState)
     }
 
+    handleSubmit = (event) =>{
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log("error")
+        }
+        else{
+            console.log("success")
+            this.props.submitInvoice()
+        }
+        this.setState({validated : true})
+
+    }
     render() {
-        const { invoiceDate, billNumber, contributerName, amount, isPending, remarks, contributorType } = this.state
+        const { invoiceDate, billNumber, contributerName, amount, isPending, remarks, contributorType, validated } = this.state
         return (
             <div className='panel'>
-                <Form>
+                <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
                     <Row>
                         <Col>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" c>
                                 <Form.Label>Bill number</Form.Label>
                                 <Form.Control value={billNumber} type="text" placeholder="Bill number" style={{ textTransform : "uppercase" }} name="billNumber"  onChange={this.handleStateUpdate}/>
                             </Form.Group>
                         </Col>
                         <Col>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" c>
                                 <Form.Label>Date</Form.Label>
                                 <DatePicker
                                     selected={invoiceDate}
@@ -66,13 +81,16 @@ class InvoiceForm extends React.Component {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" c>
                         <Form.Label>Contributers Name</Form.Label>
-                        <Form.Control value={contributerName} type="text" placeholder="Contributers Name" name="contributerName"  onChange={this.handleStateUpdate} />
+                        <Form.Control value={contributerName} type="text" placeholder="Contributers Name" name="contributerName"  onChange={this.handleStateUpdate} required/>
+                        <Form.Control.Feedback type="invalid">
+                            Please enter a contributers name.
+                        </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" c >
                         <Form.Label>Amount</Form.Label>
-                        <Form.Control value={amount} type="number" placeholder="Amount" name="amount"  onChange={this.handleStateUpdate} />
+                        <Form.Control value={amount} type="number" placeholder="Amount" min="0" name="amount"  onChange={this.handleStateUpdate} required/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Pending" checked={isPending} name="isPending"  onChange={this.handlePendingCheckBox}/>
@@ -108,14 +126,24 @@ class InvoiceForm extends React.Component {
                             name="contributorType"
                             onChange={this.handleStateUpdate}
                         />
+                        <Form.Check
+                            inline
+                            checked={contributorType === "MEMBER"}
+                            value="MEMBER"
+                            label="Member"
+                            type="radio"
+                            id={`inline-radio-4`}
+                            name="contributorType"
+                            onChange={this.handleStateUpdate}
+                        />
                     </Form.Group>
                     <br/>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" c>
                         <Form.Label>Remarks</Form.Label>
                         <Form.Control value={remarks} type="text" placeholder="Remarks" name="remarks" onChange={this.handleStateUpdate}/>
                     </Form.Group>
                     <br/>
-                    <Button variant="primary" type="submit" onClick={this.props.submitInvoice}>
+                    <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>
@@ -124,4 +152,4 @@ class InvoiceForm extends React.Component {
     }
 }
 
-export default InvoiceForm
+export default ComponentInvoiceForm

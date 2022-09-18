@@ -1,6 +1,4 @@
 import React from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
-import InvoiceForm from '../../components/InvoiceForm'
 
 class Home extends React.Component {
     submitInvoice =() =>{
@@ -9,7 +7,7 @@ class Home extends React.Component {
     render() {
         return (
             <div className='home'>
-                <InvoiceForm  submitInvoice={this.submitInvoice}  />
+                <h1>Welcome to Mitra Mandal </h1>
             </div>
         );
     }

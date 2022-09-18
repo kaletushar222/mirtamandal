@@ -17,15 +17,17 @@ code {
   margin: auto;
   margin-top: 5%;
 }
+@media only screen and (max-width: 600px) {
+  .home {
+    width: 100%;
+    margin-top: 20%;
+    padding: 3%;
+  }
+}
+
+
 
 .panel {
   padding: 5%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-@media only screen and (max-width: 600px) {
-  .home {
-    width: 90%;
-    margin-top: 20%;
-    padding: 4%;
-  }
 }
