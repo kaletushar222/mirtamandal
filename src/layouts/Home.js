@@ -6,8 +6,10 @@ class Home extends React.Component {
     }
     render() {
         return (
-            <div className='home'>
-                <h1>Welcome to Mitra Mandal </h1>
+            <div>
+                <div className='home'>
+                    <h1>Welcome to Mitra Mandal </h1>
+                </div>
             </div>
         );
     }
