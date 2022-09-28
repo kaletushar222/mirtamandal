@@ -8,44 +8,50 @@ class ComponentInvoiceForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            invoiceDate : new Date(),
-            billNumber : "",
-            contributerName : "",
-            amount : 0,
-            isPending : false,
-            remarks : "",
-            contributorType:"LOCAL",
+            invoice : {
+                invoiceDate : new Date(),
+                billNumber : "",
+                contributerName : "",
+                amount : 0,
+                isPending : false,
+                remarks : "",
+                contributorType:"LOCAL",
+            },
             validated : false,
             show : false
         }
     }
 
-    componentDidMount() {
-        
-    }
-
     handleDateChange = (value) =>{
+        const { invoice } = this.state
+        invoice["invoiceDate"] = value
         this.setState({
-            invoiceDate : value
+            invoice: invoice
         })
     }
 
     handlePendingCheckBox = (event) =>{
-        console.log(event.target.checked)
+        const { invoice } = this.state
+        invoice["isPending"] = event.target.checked
         this.setState({
-            isPending : event.target.checked
+            invoice: invoice
         })
     }
-    handleStateUpdate = (event) =>{
-        const updatedState = {}
-        updatedState[event.target.name] = event.target.value
-        this.setState(updatedState)
+
+    handleInvoicUpdate = (event) =>{
+        const { invoice } = this.state
+        invoice[event.target.name] = event.target.value
+        this.setState({
+            invoice: invoice
+        })
     }
 
     setShow = (value) => {
         this.setState({show: value});
     }
+
     handleSubmit = (event) =>{
+        const { invoice } = this.state
         event.preventDefault()
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -58,10 +64,10 @@ class ComponentInvoiceForm extends React.Component {
             this.props.submitInvoice(this.state)
         }
         this.setState({validated : true})
-
+        console.log(invoice)
     }
     render() {
-        const { invoiceDate, billNumber, contributerName, amount, isPending, remarks, contributorType, validated } = this.state
+        const { invoice, validated } = this.state
         return (
             <div>
                 <div className='panel'>
@@ -70,14 +76,14 @@ class ComponentInvoiceForm extends React.Component {
                             <Col>
                                 <Form.Group className="mb-3" c>
                                     <Form.Label>Bill number</Form.Label>
-                                    <Form.Control value={billNumber} type="text" placeholder="Bill number" style={{ textTransform : "uppercase" }} name="billNumber"  onChange={this.handleStateUpdate}/>
+                                    <Form.Control value={ invoice.billNumber } type="text" placeholder="Bill number" style={{ textTransform : "uppercase" }} name="billNumber"  onChange={this.handleInvoicUpdate}/>
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group className="mb-3" c>
                                     <Form.Label>Date</Form.Label>
                                     <DatePicker
-                                        selected={invoiceDate}
+                                        selected={ invoice.invoiceDate }
                                         className="form-control"
                                         customInput={
                                             <Form.Control type="text" placeholder="Bill number" id="validationCustom01" />
@@ -89,64 +95,64 @@ class ComponentInvoiceForm extends React.Component {
                         </Row>
                         <Form.Group className="mb-3" c>
                             <Form.Label>Contributers Name</Form.Label>
-                            <Form.Control value={contributerName} type="text" placeholder="Contributers Name" name="contributerName"  onChange={this.handleStateUpdate} required/>
+                            <Form.Control value={ invoice.contributerName } type="text" placeholder="Contributers Name" name="contributerName"  onChange={this.handleInvoicUpdate} required/>
                             <Form.Control.Feedback type="invalid">
                                 Please enter a contributers name.
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="mb-3" c >
                             <Form.Label>Amount</Form.Label>
-                            <Form.Control value={amount} type="number" placeholder="Amount" min="0" name="amount"  onChange={this.handleStateUpdate} required/>
+                            <Form.Control value={ invoice.amount } type="number" placeholder="Amount" min="0" name="amount"  onChange={this.handleInvoicUpdate} required/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Pending" checked={isPending} name="isPending"  onChange={this.handlePendingCheckBox}/>
+                            <Form.Check type="checkbox" label="Pending" checked={ invoice.isPending } name="isPending"  onChange={this.handlePendingCheckBox}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Check
                                 inline
-                                checked={contributorType === "LOCAL"}
+                                checked={invoice.contributorType === "LOCAL"}
                                 value="LOCAL"
                                 label="Local"
                                 type="radio"
                                 id={`inline-radio-1`}
                                 name="contributorType"
-                                onChange={this.handleStateUpdate}
+                                onChange={this.handleInvoicUpdate}
                             />
                             <Form.Check
                                 inline
-                                checked={contributorType === "SHOP"}
+                                checked={invoice.contributorType === "SHOP"}
                                 value="SHOP"
                                 label="Shop"
                                 type="radio"
                                 id={`inline-radio-2`}
                                 name="contributorType"
-                                onChange={this.handleStateUpdate}
+                                onChange={this.handleInvoicUpdate}
                             />
                             <Form.Check
                                 inline
-                                checked={contributorType === "POLITICIAN"}
+                                checked={invoice.contributorType === "POLITICIAN"}
                                 value="POLITICIAN"
                                 label="Politician"
                                 type="radio"
                                 id={`inline-radio-3`}
                                 name="contributorType"
-                                onChange={this.handleStateUpdate}
+                                onChange={this.handleInvoicUpdate}
                             />
                             <Form.Check
                                 inline
-                                checked={contributorType === "MEMBER"}
+                                checked={invoice.contributorType === "MEMBER"}
                                 value="MEMBER"
                                 label="Member"
                                 type="radio"
                                 id={`inline-radio-4`}
                                 name="contributorType"
-                                onChange={this.handleStateUpdate}
+                                onChange={this.handleInvoicUpdate}
                             />
                         </Form.Group>
                         <br/>
                         <Form.Group className="mb-3" c>
                             <Form.Label>Remarks</Form.Label>
-                            <Form.Control value={remarks} type="text" placeholder="Remarks" name="remarks" onChange={this.handleStateUpdate}/>
+                            <Form.Control value={ invoice.remarks } type="text" placeholder="Remarks" name="remarks" onChange={this.handleInvoicUpdate}/>
                         </Form.Group>
                         <br/>
                         <Button variant="primary" type="submit">

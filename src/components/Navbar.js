@@ -1,4 +1,4 @@
-import Container from 'react-bootstrap/Container';
+import { Container } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -8,7 +8,9 @@ function ComponentNavbar() {
         <>
             <Navbar className="fixed-top" bg="dark" variant="dark" expand="lg">
                 <Container>
-                    <Navbar.Brand href="#home">Mitra Mandal</Navbar.Brand>
+                    <Navbar.Brand href="#home">
+                        Mitra Mandal
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav activeKey={pathname} className="me-auto">
