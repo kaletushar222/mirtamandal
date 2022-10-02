@@ -1,14 +1,15 @@
 import React from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
+import InvoiceApi from '../api/InvoiceApi';
 import ComponentInvoiceForm from '../components/InvoiceForm';
-import InvoiceApi from '../api/InvoiceApi'
-import axios from 'axios'
 
 class CreateInvoice extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            show : false
+            showToast: false,
+            invoiceSubmitted: false,
+            toastMessage: ''
         }
     }
     setShow = (value) => {
@@ -16,35 +17,44 @@ class CreateInvoice extends React.Component {
     }
     submitInvoice =(invoiceObj) =>{
         const invoiceApi = new InvoiceApi()
-        console.log("createintvoice : ", invoiceApi, invoiceObj)
-        // invoiceApi
-        //     .createInvoice(invoiceObj)
-        //     .then((response) => console.log(response))
-        //     .catch((err) => console.log(err));
-
-        axios.post('localhost:4000/invoice/create', { invoiceObj })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
+        const that = this
+        invoiceApi
+            .createInvoice(invoiceObj)
+            .then((response) => {
+                console.log(response)
+                that.setState({
+                    invoiceSubmitted: true,
+                    showToast: true,
+                    toastMessage: "Invoice Created"
+                })
+                setTimeout(function(){
+                    that.setState({
+                        invoiceSubmitted: false
+                    })
+                }, 2000);
+                
+            })    
+            .catch((err) => {
+                console.log(err)
+                that.setState({
+                    showToast: true,
+                    toastMessage: "Failed to create invoice"
+                })
             });
     }
     render() {
-        const { show } = this.state
+        const { invoiceSubmitted, showToast, toastMessage } = this.state
         return (
             <div className="layout-container">
                 {/* Toast */}
-                <ToastContainer className="p-3" position="top-end">
-                    <Toast onClose={() => this.setShow(false)} show={show} delay={500000} autohide >
-                        <Toast.Header closeButton={false}>
-                            <strong className="me-auto">Alert</strong>
-                        </Toast.Header>
-                        <Toast.Body>Enter valid amount</Toast.Body>
-                    </Toast>
-                </ToastContainer>
                 <div className='home'>
-                    <ComponentInvoiceForm  submitInvoice={this.submitInvoice}  />
+                    <ComponentInvoiceForm  submitInvoice={this.submitInvoice} invoiceSubmitted={this.state.invoiceSubmitted} />
+                    <br/>
+                    <ToastContainer className="p-3" position="top-center">
+                        <Toast bg={ invoiceSubmitted?"success":"danger"} onClose={() => this.setState({showToast: false})} show={showToast} delay={1800} autohide >
+                            <Toast.Body>{toastMessage}</Toast.Body>
+                        </Toast>
+                    </ToastContainer>
                 </div>
             </div>
         );

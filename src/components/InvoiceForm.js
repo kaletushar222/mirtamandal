@@ -3,7 +3,6 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-
 class ComponentInvoiceForm extends React.Component {
     constructor(props) {
         super(props)
@@ -19,6 +18,25 @@ class ComponentInvoiceForm extends React.Component {
             },
             validated : false,
             show : false
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log(this.props.invoiceSubmitted, prevProps.invoiceSubmitted)
+        if(this.props.invoiceSubmitted && !prevProps.invoiceSubmitted){
+            this.setState({
+                invoice : {
+                    invoiceDate : new Date(),
+                    billNumber : "",
+                    contributerName : "",
+                    amount : 0,
+                    isPending : false,
+                    remarks : "",
+                    contributorType:"LOCAL",
+                },
+                validated : false,
+                show : false
+            })
         }
     }
 
@@ -61,10 +79,9 @@ class ComponentInvoiceForm extends React.Component {
         }
         else{
             console.log("success")
-            this.props.submitInvoice(this.state)
+            this.props.submitInvoice(invoice)
         }
         this.setState({validated : true})
-        console.log(invoice)
     }
     render() {
         const { invoice, validated } = this.state
