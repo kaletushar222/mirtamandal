@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import InvoiceApi from '../api/InvoiceApi';
-
+import CsvDownload from 'react-json-to-csv'
 class Income extends React.Component {
     constructor(props){
         super(props)
@@ -30,8 +30,11 @@ class Income extends React.Component {
     }
     render() {
         const { invoices } = this.state
+        let data = invoices
         return (
             <div className='income-layout'>
+                <CsvDownload data={data} />
+                <br/><br/>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
