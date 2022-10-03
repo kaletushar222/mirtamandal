@@ -35,7 +35,6 @@ code {
 }
 
 
-
 .layout-container {
    margin-top: 4%;
 }
@@ -52,4 +51,17 @@ code {
 
 .custom-container{
   margin: 0 5% 0 5%;
+}
+
+.download-button {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.download-button:hover {
+  background-color: RoyalBlue;
 }

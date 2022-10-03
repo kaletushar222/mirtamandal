@@ -1,6 +1,6 @@
 import React from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
-import InvoiceApi from '../api/InvoiceApi';
+import {createInvoice} from '../api/InvoiceApi';
 import ComponentInvoiceForm from '../components/InvoiceForm';
 
 class CreateInvoice extends React.Component {
@@ -16,10 +16,8 @@ class CreateInvoice extends React.Component {
         this.setState({show: value});
     }
     submitInvoice =(invoiceObj) =>{
-        const invoiceApi = new InvoiceApi()
         const that = this
-        invoiceApi
-            .createInvoice(invoiceObj)
+        createInvoice(invoiceObj)
             .then((response) => {
                 console.log(response)
                 that.setState({

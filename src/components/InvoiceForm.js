@@ -91,13 +91,13 @@ class ComponentInvoiceForm extends React.Component {
                     <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
                         <Row>
                             <Col>
-                                <Form.Group className="mb-3" c>
+                                <Form.Group className="mb-3">
                                     <Form.Label>Bill number</Form.Label>
                                     <Form.Control value={ invoice.billNumber } type="text" placeholder="Bill number" style={{ textTransform : "uppercase" }} name="billNumber"  onChange={this.handleInvoicUpdate}/>
                                 </Form.Group>
                             </Col>
                             <Col>
-                                <Form.Group className="mb-3" c>
+                                <Form.Group className="mb-3">
                                     <Form.Label>Date</Form.Label>
                                     <DatePicker
                                         selected={ invoice.invoiceDate }
@@ -110,14 +110,14 @@ class ComponentInvoiceForm extends React.Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Form.Group className="mb-3" c>
+                        <Form.Group className="mb-3">
                             <Form.Label>Contributers Name</Form.Label>
                             <Form.Control value={ invoice.contributerName } type="text" placeholder="Contributers Name" name="contributerName"  onChange={this.handleInvoicUpdate} required/>
                             <Form.Control.Feedback type="invalid">
                                 Please enter a contributers name.
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="mb-3" c >
+                        <Form.Group className="mb-3">
                             <Form.Label>Amount</Form.Label>
                             <Form.Control value={ invoice.amount } type="number" placeholder="Amount" min="0" name="amount"  onChange={this.handleInvoicUpdate} required/>
                         </Form.Group>
@@ -167,7 +167,7 @@ class ComponentInvoiceForm extends React.Component {
                             />
                         </Form.Group>
                         <br/>
-                        <Form.Group className="mb-3" c>
+                        <Form.Group className="mb-3">
                             <Form.Label>Remarks</Form.Label>
                             <Form.Control value={ invoice.remarks } type="text" placeholder="Remarks" name="remarks" onChange={this.handleInvoicUpdate}/>
                         </Form.Group>

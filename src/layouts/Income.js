@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
-import InvoiceApi from '../api/InvoiceApi';
+import { Table, Button } from 'react-bootstrap';
+import { getInvoice, updateInvoice } from '../api/InvoiceApi';
 import CsvDownload from 'react-json-to-csv'
+
 class Income extends React.Component {
     constructor(props){
         super(props)
@@ -9,11 +10,17 @@ class Income extends React.Component {
             invoices: []
         }
     }
+
+    //lifecycle methods
     componentDidMount(){
-        const invoiceApi = new InvoiceApi()
+        this.getInvoices()
+    }
+    
+
+    //api calls
+    getInvoices = () =>{
         const that = this
-        invoiceApi
-            .getInvoice()
+        getInvoice()
             .then((response) => {
                 console.log(response)
                 that.setState({
@@ -28,12 +35,29 @@ class Income extends React.Component {
                 })
             });
     }
+
+    deleteInvoice = (invoice) =>{
+        const that = this
+        let updateObject = { status: "DELETED" }
+        console.log(invoice)
+        if (window.confirm("DELETE : "+invoice.contributerName +'-> '+ invoice.billNumber)) {
+            updateInvoice(invoice.id, updateObject)
+                .then((response) => {
+                    console.log(response)
+                    that.getInvoices()
+                })    
+                .catch((err) => {
+                    console.log(err)
+                });
+        }
+    }
+
     render() {
         const { invoices } = this.state
         let data = invoices
         return (
             <div className='income-layout'>
-                <CsvDownload data={data} />
+                <CsvDownload className='download-button' data={data} ><i className="bi bi-download"></i> Download</CsvDownload>
                 <br/><br/>
                 <Table striped bordered hover>
                     <thead>
@@ -46,21 +70,27 @@ class Income extends React.Component {
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Remarks</th>
+                            <th>Invoice Status</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             invoices.map((invoice, key) =>{
-                                return <tr key={key}>
-                                        <td>{key+1}</td>
-                                        <td>{invoice.invoiceDate}</td>
-                                        <td>{invoice.billNumber}</td>
-                                        <td>{invoice.contributerName}</td>
-                                        <td>{invoice.contributorType}</td>
-                                        <td>{invoice.amount}</td>
-                                        <td>{invoice.isPending? "Pending" : "Received"}</td>
-                                        <td>{invoice.remarks}</td>
-                                    </tr>
+                                if(invoice.status !== "DELETED"){
+                                    return <tr key={key}>
+                                            <td>{key+1}</td>
+                                            <td>{invoice.invoiceDate}</td>
+                                            <td>{invoice.billNumber}</td>
+                                            <td>{invoice.contributerName}</td>
+                                            <td>{invoice.contributorType}</td>
+                                            <td>{invoice.amount}</td>
+                                            <td>{invoice.isPending? "Pending" : "Received"}</td>
+                                            <td>{invoice.remarks}</td>
+                                            <td>{invoice.status}</td>
+                                            <td><center><Button variant="danger" onClick={ ()=>this.deleteInvoice(invoice) }><i className="bi bi-trash"></i></Button></center></td>
+                                        </tr>
+                                }
                             })
                         }
                     </tbody>
