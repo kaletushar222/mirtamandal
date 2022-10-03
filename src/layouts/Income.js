@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { getInvoice, updateInvoice } from '../api/InvoiceApi';
 import CsvDownload from 'react-json-to-csv'
+import moment from 'moment'
 
 class Income extends React.Component {
     constructor(props){
@@ -55,6 +56,7 @@ class Income extends React.Component {
     render() {
         const { invoices } = this.state
         let data = invoices
+        
         return (
             <div className='income-layout'>
                 <CsvDownload className='download-button' data={data} ><i className="bi bi-download"></i> Download</CsvDownload>
@@ -77,20 +79,18 @@ class Income extends React.Component {
                     <tbody>
                         {
                             invoices.map((invoice, key) =>{
-                                if(invoice.status !== "DELETED"){
-                                    return <tr key={key}>
-                                            <td>{key+1}</td>
-                                            <td>{invoice.invoiceDate}</td>
-                                            <td>{invoice.billNumber}</td>
-                                            <td>{invoice.contributerName}</td>
-                                            <td>{invoice.contributorType}</td>
-                                            <td>{invoice.amount}</td>
-                                            <td>{invoice.isPending? "Pending" : "Received"}</td>
-                                            <td>{invoice.remarks}</td>
-                                            <td>{invoice.status}</td>
-                                            <td><center><Button variant="danger" onClick={ ()=>this.deleteInvoice(invoice) }><i className="bi bi-trash"></i></Button></center></td>
-                                        </tr>
-                                }
+                                return <tr key={key}>
+                                        <td>{key+1}</td>
+                                        <td>{moment(invoice.invoiceDate).format("DD/MM/YYYY LT")}</td>
+                                        <td>{invoice.billNumber}</td>
+                                        <td>{invoice.contributerName}</td>
+                                        <td>{invoice.contributorType}</td>
+                                        <td>{invoice.amount}</td>
+                                        <td>{invoice.isPending? "Pending" : "Received"}</td>
+                                        <td>{invoice.remarks}</td>
+                                        <td>{invoice.status}</td>
+                                        <td><center><Button variant="danger" onClick={ ()=>this.deleteInvoice(invoice) }><i className="bi bi-trash"></i></Button></center></td>
+                                    </tr>
                             })
                         }
                     </tbody>
