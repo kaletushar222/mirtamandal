@@ -21,12 +21,11 @@ class Income extends React.Component {
     //api calls
     getInvoices = () =>{
         const that = this
+        console.log("getinvoices : ", this.props)
         getInvoice()
             .then((response) => {
                 console.log(response)
-                that.setState({
-                    invoices: response.data
-                })
+                that.props.setInvoices(response.data)
             })    
             .catch((err) => {
                 console.log(err)
@@ -54,7 +53,7 @@ class Income extends React.Component {
     }
 
     render() {
-        const { invoices } = this.state
+        const { invoices } = this.props
         let data = invoices
         
         return (

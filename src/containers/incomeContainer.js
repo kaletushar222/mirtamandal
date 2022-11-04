@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import Income from '../layouts/Income'
-import { getInvoices } from '../actions/counterActions';
+import { setInvoices } from '../actions/incomeActions';
 
 const mapStateToProps = (state) => {
     return state.incomeReducer
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        getInvoices: () => dispatch(getInvoices())
+        setInvoices: (invoices) => dispatch(setInvoices(invoices))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Income);
