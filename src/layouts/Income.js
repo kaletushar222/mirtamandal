@@ -21,10 +21,8 @@ class Income extends React.Component {
     //api calls
     getInvoices = () =>{
         const that = this
-        console.log("getinvoices : ", this.props)
         getInvoice()
             .then((response) => {
-                console.log(response)
                 that.props.setInvoices(response.data)
             })    
             .catch((err) => {
@@ -39,11 +37,9 @@ class Income extends React.Component {
     deleteInvoice = (invoice) =>{
         const that = this
         let updateObject = { status: "DELETED" }
-        console.log(invoice)
         if (window.confirm("DELETE : "+invoice.contributerName +'-> '+ invoice.billNumber)) {
             updateInvoice(invoice.id, updateObject)
                 .then((response) => {
-                    console.log(response)
                     that.getInvoices()
                 })    
                 .catch((err) => {
@@ -57,7 +53,8 @@ class Income extends React.Component {
         let data = invoices
         
         return (
-            <div className='income-layout'>
+            <div className='custom-container income-layout'>
+                <br/><br/><br/><br/>
                 <CsvDownload className='download-button' data={data} ><i className="bi bi-download"></i> Download</CsvDownload>
                 <br/><br/>
                 <Table striped bordered hover>

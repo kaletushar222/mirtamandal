@@ -43,7 +43,7 @@ class CreateInvoice extends React.Component {
     render() {
         const { invoiceSubmitted, showToast, toastMessage } = this.state
         return (
-            <div className="layout-container">
+            <div className="custom-container layout-container">
                 {/* Toast */}
                 <div className='home'>
                     <ComponentInvoiceForm  submitInvoice={this.submitInvoice} invoiceSubmitted={this.state.invoiceSubmitted} />

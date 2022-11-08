@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-bootstrap';
 
 class Home extends React.Component {
     submitInvoice =() =>{
@@ -7,8 +8,9 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <div className='home'>
-                    <h1>Welcome to Mitra Mandal </h1>
+                <div className='home-container'>
+                    <Image className='home-image' src="cracker.jpg"/>
+                    <h1 class="centered">Mitra Mandal</h1>
                 </div>
             </div>
         );
