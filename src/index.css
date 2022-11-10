@@ -25,6 +25,21 @@ code {
   }
 }
 
+.registration{
+  width: 80%;
+  margin: auto;
+  margin-top: 8%;
+}
+
+@media only screen and (max-width: 600px) {
+  .registration{
+    width: 100%;
+    margin-top: 28%;
+  }
+  
+}
+
+
 .income-layout {
   margin-top: 8%;
 }
@@ -84,4 +99,19 @@ code {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 100px;
+}
+
+.vr {
+  display: inline-block;
+  align-self: stretch;
+  width: 1px;
+  min-height: 1em;
+  background-color: currentColor;
+  opacity: .25;
+}
+
+.members-section {
+  max-height: 472px;
+  overflow-y: auto;
+  padding: 2%;
 }
