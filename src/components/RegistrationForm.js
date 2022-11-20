@@ -8,60 +8,67 @@ class ComponentRegistrationForm extends React.Component {
         super(props)
         this.state = {
             formObject : {
-                invoiceDate : new Date(),
-                billNumber : "",
-                contributerName : "",
-                amount : 0,
-                isPending : false,
-                remarks : "",
-                contributorType:"LOCAL",
+                registrationDate : new Date(),
+                address : "",
+                groupName : "",
+                chiefPersonName : "",
+                chiefPersonContact : "",
+                description : "",
+                members: [{
+                    name: '',
+                    contact: '',
+                    role: '',
+                    id: 1
+                }]
             },
             validated : false,
-            show : false,
-            members: [
-                {
-                    id: 1,
-                    name: "",
-                    contact: "",
-                    role: ""
-                }
-            ]
+            show : false
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
-        console.log(this.props.invoiceSubmitted, prevProps.invoiceSubmitted)
         if(this.props.invoiceSubmitted && !prevProps.invoiceSubmitted){
-            this.setState({
-                formObject : {
-                    registrationDate : new Date(),
-                    address : "",
-                    groupName : "",
-                    chiefPersonName : "",
-                    chiefPersonContact : "",
-                    description : "",
-                    contributorType:"LOCAL",
-                },
-                validated : false,
-                show : false
-            })
+            // this.setState({
+            //     formObject : {
+            //         registrationDate : new Date(),
+            //         address : "",
+            //         groupName : "",
+            //         chiefPersonName : "",
+            //         chiefPersonContact : "",
+            //         description : "",
+            //     },
+            //     validated : false,
+            //     show : false
+            // })
         }
     }
 
     handleDateChange = (value) =>{
-        const { invoice } = this.state
-        invoice["registrationDate"] = value
+        const { formObject } = this.state
+        formObject["registrationDate"] = value
         this.setState({
-            invoice: invoice
+            formObject: formObject
         })
     }
 
     handleFormUpdate = (event) =>{
-        const { invoice } = this.state
-        invoice[event.target.name] = event.target.value
+        const { formObject } = this.state
+        formObject[event.target.name] = event.target.value
         this.setState({
-            invoice: invoice
+            formObject: formObject
         })
+    }
+
+    handleMemberUpdate = (event, index) =>{
+        const { formObject } = this.state
+        console.log("member update : ",event.target.name, event.target.value, index)
+        if(formObject.members && formObject.members.length > 0){
+            console.log(formObject.members, formObject.members[index])
+            formObject.members[index][event.target.name] = event.target.value
+            this.setState({
+                formObject : formObject
+            })
+        }
     }
 
     setShow = (value) => {
@@ -85,28 +92,31 @@ class ComponentRegistrationForm extends React.Component {
     }
 
     addNewMember = () =>{
-        const { members } = this.state
-        members.push({
-            id: members.length + 1,
+        const { formObject } = this.state
+        const length = formObject.members.length
+        formObject.members.push({
+            id: formObject.members[length - 1].id + 1,
             name: "",
             contact: "",
             role: "",
         })
         this.setState({
-            members: members
+            formObject: formObject
         })
     }
 
     deleteMember = (index) =>{
-        const { members } = this.state
-        members.splice(index, 1)
-        this.setState({
-            members: members
-        })
+        const { formObject } = this.state
+        if(formObject.members.length > 1){ //not to delete last element
+            formObject.members.splice(index, 1)
+            this.setState({
+                formObject: formObject
+            })
+        }
     }
 
     render() {
-        const { formObject, validated, members } = this.state
+        const { formObject, validated } = this.state
         return (
             <div>
                 <div className='panel'>
@@ -152,28 +162,28 @@ class ComponentRegistrationForm extends React.Component {
                             <Col>
                                 <div className="members-section">
                                     {
-                                        members.map((member, index)=>{
+                                        formObject.members.map((member, index)=>{
                                             return <Row key={index}>
                                                 {index+1}.
                                                 <Col>
                                                     <Form.Group className="mb-3">
                                                         <Form.Label>Member Name</Form.Label>
-                                                        <Form.Control value={ member.name } type="text" placeholder="Enter Member Name" name="memberName"  onChange={this.handleFormUpdate} />
+                                                        <Form.Control value={ member.name } type="text" placeholder="Enter Member Name" name="name"  onChange={(event)=>this.handleMemberUpdate(event, index)} />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
                                                     <Form.Group className="mb-3">
                                                         <Form.Label>Member Contact</Form.Label>
-                                                        <Form.Control value={ member.contact } type="text" placeholder="Enter Member Contact" name="memberContact"  onChange={this.handleFormUpdate} />
+                                                        <Form.Control value={ member.contact } type="text" placeholder="Enter Member Contact" name="contact"  onChange={(event)=>this.handleMemberUpdate(event, index)} />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
                                                     <Form.Group className="mb-3">
                                                         <Form.Label>Member Role</Form.Label>
-                                                        <Form.Control value={ member.role } type="text" placeholder="Enter Member Role" name="memberRole"  onChange={this.handleFormUpdate} />
+                                                        <Form.Control value={ member.role } type="text" placeholder="Enter Member Role" name="role"  onChange={(event)=>this.handleMemberUpdate(event, index)} />
                                                     </Form.Group>
                                                 </Col>
-                                                <Button style={{marginTop: "30px", marginBottom: "30px"}} variant="danger" onClick={ ()=>this.deleteMember(member.id) }><i className="bi bi-trash"></i></Button>
+                                                <Button style={{marginTop: "30px", marginBottom: "30px"}} variant="danger" onClick={ ()=>this.deleteMember(index) }><i className="bi bi-trash"></i></Button>
                                             </Row>
                                         })
                                     }
