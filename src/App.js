@@ -7,10 +7,15 @@ import CreateInvoice from './layouts/CreateInvoice';
 import Expense from './layouts/Expense';
 import Home from './layouts/Home';
 import Registration from "./layouts/Registration";
+import DairyInvoice from './layouts/Appmodules/Dairy/DairyInvoice';
+
 function App() {
-  return (
+	const otherApp = window.location.href.includes("dairyapp")?true:false
+  	return (
    	 	<div className="App">
-			<ComponentNavbar/>
+			{
+				!otherApp && <ComponentNavbar/>
+			}
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
@@ -19,10 +24,13 @@ function App() {
 					<Route path="/income" element={<IncomeContainer />}></Route>
 					<Route path="/expense" element={<Expense />}></Route>
 					<Route path="/counter" element={<CounterContainer/> }></Route>
+
+					{/* Dairy app routes */}
+					<Route path="/dairyapp" element={<DairyInvoice/> }></Route>
 				</Routes>
 			</BrowserRouter>
     	</div>
-  );
+  	);
 }
 
 export default App;
