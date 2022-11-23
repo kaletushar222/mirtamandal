@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/mitramandal/static/css/main.6feefc7d.css",
-    "main.js": "/mitramandal/static/js/main.ef125589.js",
+    "main.css": "/mitramandal/static/css/main.0b63853a.css",
+    "main.js": "/mitramandal/static/js/main.e3042316.js",
     "index.html": "/mitramandal/index.html",
-    "main.6feefc7d.css.map": "/mitramandal/static/css/main.6feefc7d.css.map",
-    "main.ef125589.js.map": "/mitramandal/static/js/main.ef125589.js.map"
+    "main.0b63853a.css.map": "/mitramandal/static/css/main.0b63853a.css.map",
+    "main.e3042316.js.map": "/mitramandal/static/js/main.e3042316.js.map"
   },
   "entrypoints": [
-    "static/css/main.6feefc7d.css",
-    "static/js/main.ef125589.js"
+    "static/css/main.0b63853a.css",
+    "static/js/main.e3042316.js"
   ]
 }
