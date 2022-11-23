@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mitramandal/static/css/main.ac973edd.css",
+    "main.js": "/mitramandal/static/js/main.e9f7e536.js",
+    "index.html": "/mitramandal/index.html",
+    "main.ac973edd.css.map": "/mitramandal/static/css/main.ac973edd.css.map",
+    "main.e9f7e536.js.map": "/mitramandal/static/js/main.e9f7e536.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ac973edd.css",
+    "static/js/main.e9f7e536.js"
+  ]
+}
