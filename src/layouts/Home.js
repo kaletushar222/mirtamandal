@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-
+import crackerImg from '../images/cracker.jpg'
 class Home extends React.Component {
     submitInvoice =() =>{
         console.log("invoice submitted")
@@ -9,7 +9,7 @@ class Home extends React.Component {
         return (
             <div>
                 <div className='home-container'>
-                    <Image className='home-image' src="cracker.jpg"/>
+                    <Image className='home-image' src={crackerImg}/>
                     <h1 className="centered">Mitra Mandal</h1>
                 </div>
             </div>
