@@ -59,6 +59,12 @@ code {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+@media only screen and (max-width: 600px) {
+  .panel {
+    padding: 3%;
+  }
+}
+
 .custom-toast {
   background-color: aquamarine;
   width: 50px;
@@ -66,6 +72,12 @@ code {
 
 .custom-container{
   margin: 0 5% 0 5%;
+}
+
+@media only screen and (max-width: 600px) {
+  .custom-container{
+    margin: 0 3% 0 3%;
+  }
 }
 
 .download-button {
@@ -110,8 +122,8 @@ code {
   opacity: .25;
 }
 
-.members-section {
-  max-height: 472px;
-  overflow-y: auto;
-  padding: 2%;
+@media only screen and (max-width: 600px) {
+  .vr {
+    display: none;
+  }
 }

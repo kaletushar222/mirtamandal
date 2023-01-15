@@ -1,0 +1,53 @@
+.registration-panel {
+    padding: 2%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+@media only screen and (max-width: 600px) {
+    .registration-panel {
+        padding: 3%;
+    }
+}
+
+.delete-btn{
+    margin: 30px 0px 30px 0px;
+    width: 100%;
+    padding: 16%;
+}
+
+@media only screen and (max-width: 600px) {
+    .delete-btn{
+        margin: 0px 0px 30px 0px;
+        padding: 1%;
+    }
+}
+
+.member-form {
+    padding-top: 2%;
+    box-shadow: rgb(182 170 162 / 12%) 2px 4px 13px 3px;
+    border: 1px solid #dfdfdf;
+    margin-right: 2%;
+}
+@media only screen and (max-width: 600px) {
+    .member-form {
+        padding-top: 2%;
+        box-shadow: rgb(182 170 162 / 12%) 2px 4px 13px 3px;
+        border-left: 10px solid #dfdfdf;
+        margin-right: 0;
+    }
+}
+
+
+.members-section {
+    max-height: 472px;
+    overflow-y: auto;
+    padding: 2%;
+}
+@media only screen and (max-width: 600px) {
+    .members-section {
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 2%;
+    }
+}
+

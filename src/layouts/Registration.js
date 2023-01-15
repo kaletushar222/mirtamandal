@@ -1,6 +1,7 @@
 import React from 'react';
 import ComponentRegistrationForm from '../components/RegistrationForm';
 import {registerGroup} from '../api/GroupApi';
+import './Registration.css'
 
 class CreateInvoice extends React.Component {
     constructor(props) {

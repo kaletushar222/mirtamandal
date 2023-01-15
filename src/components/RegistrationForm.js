@@ -119,7 +119,7 @@ class ComponentRegistrationForm extends React.Component {
         const { formObject, validated } = this.state
         return (
             <div>
-                <div className='panel'>
+                <div className='registration-panel'>
                     <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
                         <Row>
                             <Col md="4" lg="4">
@@ -163,31 +163,36 @@ class ComponentRegistrationForm extends React.Component {
                                 <div className="members-section">
                                     {
                                         formObject.members.map((member, index)=>{
-                                            return <Row key={index}>
-                                                {index+1}.
-                                                <Col>
-                                                    <Form.Group className="mb-3">
-                                                        <Form.Label>Member Name</Form.Label>
-                                                        <Form.Control value={ member.name } type="text" placeholder="Enter Member Name" name="name"  onChange={(event)=>this.handleMemberUpdate(event, index)} required />
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col>
-                                                    <Form.Group className="mb-3">
-                                                        <Form.Label>Member Contact</Form.Label>
-                                                        <Form.Control value={ member.contact } type="text" placeholder="Enter Member Contact" name="contact"  onChange={(event)=>this.handleMemberUpdate(event, index)} required />
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col>
-                                                    <Form.Group className="mb-3">
-                                                        <Form.Label>Member Role</Form.Label>
-                                                        <Form.Control value={ member.role } type="text" placeholder="Enter Member Role" name="role"  onChange={(event)=>this.handleMemberUpdate(event, index)} required />
-                                                    </Form.Group>
-                                                </Col>
-                                                <Button style={{marginTop: "30px", marginBottom: "30px"}} variant="danger" onClick={ ()=>this.deleteMember(index) }><i className="bi bi-trash"></i></Button>
-                                            </Row>
+                                            return <div>
+                                                <Row key={index} className="member-form">
+                                                    <Col md="4" lg="4" sm="8" >
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>{index+1}. Member Name</Form.Label>
+                                                            <Form.Control value={ member.name } type="text" placeholder="Member Name" name="name"  onChange={(event)=>this.handleMemberUpdate(event, index)} required />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md="4" lg="4" sm="8">
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Member Contact</Form.Label>
+                                                            <Form.Control value={ member.contact } type="text" placeholder="Member Contact" name="contact"  onChange={(event)=>this.handleMemberUpdate(event, index)} required />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md="3" lg="3" sm="8">
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Member Role</Form.Label>
+                                                            <Form.Control value={ member.role } type="text" placeholder="Member Role" name="role"  onChange={(event)=>this.handleMemberUpdate(event, index)} required />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md="1" lg="1" sm="8">
+                                                        <Button className='delete-btn' variant="danger" onClick={ ()=>this.deleteMember(index) }><i className='bi bi-trash'></i></Button>
+                                                    </Col>
+                                                </Row>
+                                                <br/>
+                                            </div>
                                         })
                                     }
                                 </div>
+                                <br/>
                                 <Button variant="secondary"  onClick={ this.addNewMember } >+ Add member</Button>
                             </Col>
                         </Row>
