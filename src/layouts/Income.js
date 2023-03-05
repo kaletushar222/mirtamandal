@@ -54,7 +54,6 @@ class Income extends React.Component {
         
         return (
             <div className='custom-container income-layout'>
-                <br/><br/><br/><br/>
                 <CsvDownload className='download-button' data={data} ><i className="bi bi-download"></i> Download</CsvDownload>
                 <br/><br/>
                 <Table striped bordered hover>
