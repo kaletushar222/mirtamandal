@@ -16,12 +16,13 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
-					<Route path="/login" element={<Login/> }></Route>
-					<Route path="/register" element={<Registration />}></Route>
-					<Route path="/createinvoice" element={<CreateInvoice />}></Route>
-					<Route path="/income" element={<IncomeContainer />}></Route>
-					<Route path="/expense" element={<Expense />}></Route>
-					<Route path="/counter" element={<CounterContainer/> }></Route>
+					<Route path="/mitramandal" element={<Home />}></Route>
+					<Route path="/mitramandal/login" element={<Login/> }></Route>
+					<Route path="/mitramandal/register" element={<Registration />}></Route>
+					<Route path="/mitramandal/createinvoice" element={<CreateInvoice />}></Route>
+					<Route path="/mitramandal/income" element={<IncomeContainer />}></Route>
+					<Route path="/mitramandal/expense" element={<Expense />}></Route>
+					<Route path="/mitramandal/counter" element={<CounterContainer/> }></Route>
 				</Routes>
 			</BrowserRouter>
     	</div>

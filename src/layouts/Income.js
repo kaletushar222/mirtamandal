@@ -49,13 +49,38 @@ class Income extends React.Component {
     }
 
     render() {
-        const { invoices } = this.props
-        let data = invoices
-        
+        const { invoices } = this.props;
+        let data = invoices;
+        let amountReceived = 0;
+        let amountPending = 0;
+        let amountTotal = 0;
+        console.log(invoices);
+
+        invoices.forEach((inv)=>{
+            if(inv.status === "ACTIVE"){
+                if(inv.isPending){
+                    amountPending = amountPending  + inv.amount;
+                }
+                else{
+                    amountReceived = amountReceived + inv.amount;
+                }
+            }
+        })
+
+        amountPending = Math.round(amountPending);
+        amountReceived = Math.round(amountReceived);
+        amountTotal = amountPending + amountReceived;
+
         return (
             <div className='custom-container income-layout'>
                 <CsvDownload className='download-button' data={data} ><i className="bi bi-download"></i> Download</CsvDownload>
                 <br/><br/>
+                    <div className='box'>
+                        <div style={{padding: "1%"}}>
+                            <b>Received</b>: {amountReceived}  <b style={{marginLeft: "2%"}}>Pending</b>: {amountPending} <b style={{marginLeft: "2%"}}>Total</b>:  {amountTotal}
+                        </div>
+                    </div>
+                <br/>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
