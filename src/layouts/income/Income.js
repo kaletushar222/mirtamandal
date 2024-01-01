@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
-import { getInvoice, updateInvoice } from '../api/InvoiceApi';
+import { getInvoice, updateInvoice } from '../../api/InvoiceApi';
 import CsvDownload from 'react-json-to-csv'
 import moment from 'moment'
 

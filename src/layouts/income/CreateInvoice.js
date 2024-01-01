@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
-import {createInvoice} from '../api/InvoiceApi';
-import ComponentInvoiceForm from '../components/InvoiceForm';
+import {createInvoice} from '../../api/InvoiceApi';
+import ComponentInvoiceForm from '../../components/InvoiceForm';
 
 class CreateInvoice extends React.Component {
     constructor(props){

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Income from '../layouts/Income'
+import Income from '../layouts/income/Income'
 import { setInvoices } from '../actions/incomeActions';
 
 const mapStateToProps = (state) => {
