@@ -73,7 +73,7 @@ class ComponentExpenseForm extends React.Component {
         }
         else{
             console.log("success")
-            this.props.submitexpense(expense)
+            this.props.submitExpense(expense)
         }
         this.setState({validated : true})
     }
@@ -106,7 +106,7 @@ class ComponentExpenseForm extends React.Component {
                         </Row>
                         <Form.Group className="mb-3">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control value={ expense.title } type="text" placeholder="Expense Title" style={{ textTransform : "uppercase" }} name="title"  onChange={this.handleExpenseUpdate}/>
+                            <Form.Control value={ expense.title } type="text" placeholder="Expense Title" style={{ textTransform : "uppercase" }} name="title"  onChange={this.handleExpenseUpdate} required/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Remarks</Form.Label>
