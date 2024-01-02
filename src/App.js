@@ -3,11 +3,12 @@ import './App.css';
 import ComponentNavbar from './components/Navbar';
 import CounterContainer from './containers/counterContainer';
 import IncomeContainer from "./containers/incomeContainer";
-import CreateInvoice from './layouts/income/CreateInvoice';
-import Expense from './layouts/expense/Expense.js';
 import Home from './layouts/Home';
-import Registration from "./layouts/Registration";
 import Login from './layouts/Login';
+import Registration from "./layouts/Registration";
+import Expense from './layouts/expense/Expense.js';
+import CreateExpense from './layouts/expense/CreateExpense';
+import CreateInvoice from './layouts/income/CreateInvoice';
 
 function App() {
   	return (
@@ -21,6 +22,7 @@ function App() {
 					<Route path="/mitramandal/register" element={<Registration />}></Route>
 					<Route path="/mitramandal/createinvoice" element={<CreateInvoice />}></Route>
 					<Route path="/mitramandal/income" element={<IncomeContainer />}></Route>
+					<Route path="/mitramandal/createexpense" element={<CreateExpense />}></Route>
 					<Route path="/mitramandal/expense" element={<Expense />}></Route>
 					<Route path="/mitramandal/counter" element={<CounterContainer/> }></Route>
 				</Routes>

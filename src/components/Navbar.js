@@ -16,9 +16,10 @@ function ComponentNavbar() {
                         <Nav activeKey={pathname} className="me-auto">
                             <Nav.Link href="/mitramandal/createinvoice">Create Invoice</Nav.Link>
                             <Nav.Link href="/mitramandal/income">Income</Nav.Link>
+                            <Nav.Link href="/mitramandal/createexpense">Create Expense</Nav.Link>
                             <Nav.Link href="/mitramandal/expense">Expense</Nav.Link>
                         </Nav>
-                        <Nav>
+                        <Nav style={{ marginLeft: "auto" }}>
                             <Nav.Link href="/mitramandal/login">Login</Nav.Link>
                             <Nav.Link eventKey={2} href="/mitramandal/register">Register</Nav.Link>
                         </Nav>
