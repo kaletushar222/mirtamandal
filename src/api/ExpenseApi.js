@@ -13,7 +13,7 @@ function init(){
     // }
 
     let client = axios.create({
-        baseURL: process.env.REACT_APP_API_ENDPOINT+ "invoice/",
+        baseURL: process.env.REACT_APP_API_ENDPOINT+ "expense/",
         timeout: 31000,
         headers: headers,
     });

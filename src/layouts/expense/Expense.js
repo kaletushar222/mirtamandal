@@ -23,6 +23,7 @@ class Expense extends React.Component {
         const that = this
         getExpense()
             .then((response) => {
+                console.log("response")
                 that.props.setExpenses(response.data)
             })    
             .catch((err) => {
@@ -70,6 +71,7 @@ class Expense extends React.Component {
         amountSpent = Math.round(amountSpent);
         amountTotal = amountRemaining + amountSpent;
 
+        console.log("expenses :------------> ", expenses);
         return (
             <div className='custom-container income-layout'>
                 <CsvDownload className='download-button' data={expenses} ><i className="bi bi-download"></i> Download</CsvDownload>
@@ -85,8 +87,8 @@ class Expense extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Title</th>
+                            <th>Date</th>
                             <th>Amount</th>
-                            <th>Remarks</th>
                             <th>Expense Status</th>
                             <th>Delete</th>
                         </tr>
@@ -96,10 +98,11 @@ class Expense extends React.Component {
                             expenses.map((expense, key) =>{
                                 return <tr key={key}>
                                         <td>{key+1}</td>
+                                        <td>{expense.title}</td>
                                         <td>{moment(expense.expenseDate).format("DD/MM/YYYY LT")}</td>
                                         <td>{expense.amount}</td>
-                                        <td>{expense.remarks}</td>
                                         <td>{expense.status}</td>
+                                        <td>{expense.remarks}</td>
                                         <td><center><Button variant="danger" onClick={ ()=>this.deleteExpense(expense) }><i className="bi bi-trash"></i></Button></center></td>
                                     </tr>
                             })
