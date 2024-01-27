@@ -1,50 +1,51 @@
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { getExpense, updateExpense } from '../../api/ExpenseApi';
-import CsvDownload from 'react-json-to-csv'
-import moment from 'moment'
+import CsvDownload from 'react-json-to-csv';
+import moment from 'moment';
 
 class Expense extends React.Component {
     constructor(props){
         super(props)
         this.state = {
             expenses: []
-        }
+        };
     }
 
     //lifecycle methods
     componentDidMount(){
-        this.getExpenses()
+        this.getExpenses();
     }
     
 
     //api calls
     getExpenses = () =>{
         const that = this
+        console.log("that : ",that);
         getExpense()
             .then((response) => {
-                console.log("response")
-                that.props.setExpenses(response.data)
+                console.log("response", response.data);
+                that.props.setExpenses(response.data);
             })    
             .catch((err) => {
-                console.log(err)
+                console.log(err);
                 that.setState({
                     showToast: true,
                     toastMessage: "Error in fetching data"
-                })
+                });
             });
     }
 
     deleteExpense = (expense) =>{
         const that = this
-        let updateObject = { status: "DELETED" }
+        let updateObject = { status: "DELETED" };
         if (window.confirm("DELETE : "+expense.contributerName +'-> '+ expense.billNumber)) {
             updateExpense(expense.id, updateObject)
                 .then((response) => {
-                    that.getExpenses()
+                    that.getExpenses();
                 })    
                 .catch((err) => {
-                    console.log(err)
+                    console.log(err);
                 });
         }
     }
@@ -72,6 +73,7 @@ class Expense extends React.Component {
         amountTotal = amountRemaining + amountSpent;
 
         console.log("expenses :------------> ", expenses);
+        console.log("state : ----->  ", this.state)
         return (
             <div className='custom-container income-layout'>
                 <CsvDownload className='download-button' data={expenses} ><i className="bi bi-download"></i> Download</CsvDownload>

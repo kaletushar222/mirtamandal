@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import ComponentNavbar from './components/Navbar';
+import ExpenseContainer from "./containers/expenseContainer";
 import IncomeContainer from "./containers/incomeContainer";
 import Home from './layouts/Home';
 import Login from './layouts/Login';
 import Registration from "./layouts/Registration";
 import CreateExpense from './layouts/expense/CreateExpense';
-import Expense from './layouts/expense/Expense.js';
 import CreateInvoice from './layouts/income/CreateInvoice';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
 					<Route path="/mitramandal/createinvoice" element={<CreateInvoice />}></Route>
 					<Route path="/mitramandal/income" element={<IncomeContainer />}></Route>
 					<Route path="/mitramandal/createexpense" element={<CreateExpense />}></Route>
-					<Route path="/mitramandal/expense" element={<Expense />}></Route>
+					<Route path="/mitramandal/expense" element={<ExpenseContainer />}></Route>
 				</Routes>
 			</BrowserRouter>
     	</div>

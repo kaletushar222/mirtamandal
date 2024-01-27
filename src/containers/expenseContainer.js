@@ -1,13 +1,13 @@
-import { connect } from 'react-redux'
-import Expense from '../layouts/expense/Expense'
+import { connect } from 'react-redux';
 import { setExpenses } from '../actions/expenseActions';
+import Expense from '../layouts/expense/Expense';
 
 const mapStateToProps = (state) => {
-    return state.incomeReducer
+    return state.expenseReducer
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        setExpense: (expenses) => dispatch(setExpenses(expenses))
+        setExpenses: (expenses) => dispatch(setExpenses(expenses))
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Income);
+export default connect(mapStateToProps, mapDispatchToProps)(Expense);
