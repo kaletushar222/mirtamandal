@@ -1,0 +1,18 @@
+.btn-close {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+  padding: 10px;
+}
+
+.btn-close:hover {
+  background-color: #f5c6cb;
+  border-color: #f3b7bb;
+  color: #721c24;
+}
+
+.btn-close:focus {
+  background-color: #f5c6cb;
+  border-color: #f3b7bb;
+  color: #721c24;
+}

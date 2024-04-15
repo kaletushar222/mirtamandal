@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import { getInvoice, updateInvoice } from '../../api/InvoiceApi';
 import CsvDownload from 'react-json-to-csv'
 import moment from 'moment'
+import Invoice from "./Invoice";
 
 class Income extends React.Component {
     constructor(props){
@@ -86,7 +87,8 @@ class Income extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Date</th>
-                            <th>Bill No.</th>
+                            <th>Invoice No.</th>
+                            <th>View Invoice</th>
                             <th>Contibuters Name</th>
                             <th>Type</th>
                             <th>Amount</th>
@@ -103,6 +105,7 @@ class Income extends React.Component {
                                         <td>{key+1}</td>
                                         <td>{moment(invoice.invoiceDate).format("DD/MM/YYYY LT")}</td>
                                         <td>{invoice.billNumber}</td>
+                                        <td><Invoice invoice={ invoice } /></td>
                                         <td>{invoice.contributerName}</td>
                                         <td>{invoice.contributorType}</td>
                                         <td>{invoice.amount}</td>
