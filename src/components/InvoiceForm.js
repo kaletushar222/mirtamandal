@@ -9,7 +9,7 @@ class ComponentInvoiceForm extends React.Component {
         this.state = {
             invoice : {
                 invoiceDate : new Date(),
-                billNumber : "",
+                invoiceNo : "",
                 contributerName : "",
                 amount : 0,
                 isPending : false,
@@ -27,7 +27,7 @@ class ComponentInvoiceForm extends React.Component {
             this.setState({
                 invoice : {
                     invoiceDate : new Date(),
-                    billNumber : "",
+                    invoiceNo : "",
                     contributerName : "",
                     amount : 0,
                     isPending : false,
@@ -79,6 +79,7 @@ class ComponentInvoiceForm extends React.Component {
         }
         else{
             console.log("success")
+            invoice.invoiceNo = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000; // use doc tracker
             this.props.submitInvoice(invoice)
         }
         this.setState({validated : true})
@@ -93,7 +94,7 @@ class ComponentInvoiceForm extends React.Component {
                             <Col>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Bill number</Form.Label>
-                                    <Form.Control value={ invoice.billNumber } type="text" placeholder="Bill number" style={{ textTransform : "uppercase" }} name="billNumber"  onChange={this.handleInvoicUpdate}/>
+                                    <Form.Control value={ invoice.invoiceNo } type="text" placeholder="Bill number" style={{ textTransform : "uppercase" }} name="invoiceNo"  onChange={this.handleInvoicUpdate}/>
                                 </Form.Group>
                             </Col>
                             <Col>

@@ -22,10 +22,10 @@ class Home extends React.Component {
                     <Image className='home-image' src={crackerImg}/>
                     <h1 className="centered">Mitra Mandal</h1>
                 </div>
-                <div className='home-container'>
+                {/* <div className='home-container'>
                     <Image className='home-image' src={ganeshImage}/>
                     <h1 className="centered">Ganesh Festival</h1>
-                </div>
+                </div> */}
             </div>
         );
     }

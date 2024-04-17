@@ -18,6 +18,7 @@ function ComponentNavbar() {
                             <Nav.Link href="/mitramandal/income">Income</Nav.Link>
                             <Nav.Link href="/mitramandal/createexpense">Create Expense</Nav.Link>
                             <Nav.Link href="/mitramandal/expense">Expense</Nav.Link>
+                            <Nav.Link href="/mitramandal/doctracker">Doc Tracker</Nav.Link>
                         </Nav>
                         <Nav style={{ marginLeft: "auto" }}>
                             <Nav.Link href="/mitramandal/login">Login</Nav.Link>

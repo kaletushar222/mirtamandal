@@ -20,7 +20,7 @@ const Invoice = (props) => {
 					<Modal.Title>Ganesh Chaturthi Invoice</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<div>Invoice Number: {invoice.billNumber}</div>
+					<div>Invoice Number: {invoice.invoiceNo}</div>
 					<div>Date: {moment(invoice.invoiceDate).format("DD/MM/YYYY")}</div>
 					<div>
 						<h3>Contributor:</h3>

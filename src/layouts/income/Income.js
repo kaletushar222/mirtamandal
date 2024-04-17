@@ -4,6 +4,7 @@ import { getInvoice, updateInvoice } from '../../api/InvoiceApi';
 import CsvDownload from 'react-json-to-csv'
 import moment from 'moment'
 import Invoice from "./Invoice";
+import utils from '../../utils/utils';
 
 class Income extends React.Component {
     constructor(props){
@@ -18,6 +19,7 @@ class Income extends React.Component {
         this.getInvoices()
     }
     
+
 
     //api calls
     getInvoices = () =>{
@@ -38,7 +40,21 @@ class Income extends React.Component {
     deleteInvoice = (invoice) =>{
         const that = this
         let updateObject = { status: "DELETED" }
-        if (window.confirm("DELETE : "+invoice.contributerName +'-> '+ invoice.billNumber)) {
+        if (window.confirm("DELETE : "+invoice.contributerName +'-> '+ invoice.invoiceNo)) {
+            updateInvoice(invoice.id, updateObject)
+                .then((response) => {
+                    that.getInvoices()
+                })    
+                .catch((err) => {
+                    console.log(err)
+                });
+        }
+    }
+
+    revertDelete = (invoice) => {
+        const that = this
+        let updateObject = { status: "ACTIVE" }
+        if (window.confirm("Revert Delete : "+invoice.contributerName +'-> '+ invoice.invoiceNo)) {
             updateInvoice(invoice.id, updateObject)
                 .then((response) => {
                     that.getInvoices()
@@ -78,7 +94,9 @@ class Income extends React.Component {
                 <br/><br/>
                     <div className='box'>
                         <div style={{padding: "1%"}}>
-                            <b>Received</b>: {amountReceived}  <b style={{marginLeft: "2%"}}>Pending</b>: {amountPending} <b style={{marginLeft: "2%"}}>Total</b>:  {amountTotal}
+                            <b>Received</b>:  <span className='green-text'> { utils.formatINR(amountReceived) }</span>
+                            <b style={{marginLeft: "2%"}}>Pending</b>: <span className="red-text"> { utils.formatINR(amountPending)} </span>
+                            <b style={{marginLeft: "2%"}}>Total</b>: <span className='blue-text' > { utils.formatINR(amountTotal)} </span>
                         </div>
                     </div>
                 <br/>
@@ -104,7 +122,7 @@ class Income extends React.Component {
                                 return <tr key={key}>
                                         <td>{key+1}</td>
                                         <td>{moment(invoice.invoiceDate).format("DD/MM/YYYY LT")}</td>
-                                        <td>{invoice.billNumber}</td>
+                                        <td>{invoice.invoiceNo}</td>
                                         <td><Invoice invoice={ invoice } /></td>
                                         <td>{invoice.contributerName}</td>
                                         <td>{invoice.contributorType}</td>
@@ -112,7 +130,16 @@ class Income extends React.Component {
                                         <td>{invoice.isPending? "Pending" : "Received"}</td>
                                         <td>{invoice.remarks}</td>
                                         <td>{invoice.status}</td>
-                                        <td><center><Button variant="danger" onClick={ ()=>this.deleteInvoice(invoice) }><i className="bi bi-trash"></i></Button></center></td>
+                                        <td>
+                                            <center>
+                                                {
+                                                    invoice.status === "DELETED" ?
+                                                        <Button variant="secondary" onClick={ ()=>this.revertDelete(invoice) }><i className="bi bi-arrow-counterclockwise"></i></Button>
+                                                    :
+                                                        <Button variant="danger" onClick={ ()=>this.deleteInvoice(invoice) }><i className="bi bi-trash"></i></Button>
+                                                }
+                                            </center>
+                                        </td>
                                     </tr>
                             })
                         }

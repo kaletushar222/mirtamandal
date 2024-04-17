@@ -73,6 +73,7 @@ class ComponentExpenseForm extends React.Component {
         }
         else{
             console.log("success")
+            expense.expenseNo = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000; // use doc tracker
             this.props.submitExpense(expense)
         }
         this.setState({validated : true})
