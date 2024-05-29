@@ -16,18 +16,18 @@ const Invoice = (props) => {
 			</Button>
 
 			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
+				<Modal.Header>
 					<Modal.Title>Ganesh Chaturthi Invoice</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<div>Invoice Number: {invoice.invoiceNo}</div>
 					<div>Date: {moment(invoice.invoiceDate).format("DD/MM/YYYY")}</div>
 					<div>
-						<h3>Contributor:</h3>
+						<strong>Contributor:</strong>
 						<div>{invoice.contributerName}</div>
 					</div>
 					<div>
-						<h3>Amount:</h3>
+						<strong>Amount:</strong>
 						<div>{invoice.amount}</div>
 					</div>
 				</Modal.Body>

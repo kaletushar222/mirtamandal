@@ -1,11 +1,14 @@
 .green-text { 
     color: green;
+    font-weight: bold;
 }
 
 .red-text {
     color: red;
+    font-weight: bold;
 }
 
 .blue-text {
     color: blue;
+    font-weight: bold;
 }
