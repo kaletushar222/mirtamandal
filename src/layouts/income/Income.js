@@ -7,26 +7,18 @@ import Invoice from "./Invoice";
 import utils from '../../utils/utils';
 
 class Income extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            invoices: []
-        }
-    }
 
     //lifecycle methods
     componentDidMount(){
         this.getInvoices()
     }
-    
-
 
     //api calls
     getInvoices = () =>{
         const that = this
         getInvoice()
             .then((response) => {
-                that.props.setInvoices(response.data)
+                that.props.setInvoices(response.data);
             })    
             .catch((err) => {
                 console.log(err)
@@ -38,7 +30,7 @@ class Income extends React.Component {
     }
 
     deleteInvoice = (invoice) =>{
-        const that = this
+        const that = this;
         let updateObject = { status: "DELETED" }
         if (window.confirm("DELETE : "+invoice.contributerName +'-> '+ invoice.invoiceNo)) {
             updateInvoice(invoice.id, updateObject)
@@ -52,7 +44,7 @@ class Income extends React.Component {
     }
 
     revertDelete = (invoice) => {
-        const that = this
+        const that = this;
         let updateObject = { status: "ACTIVE" }
         if (window.confirm("Revert Delete : "+invoice.contributerName +'-> '+ invoice.invoiceNo)) {
             updateInvoice(invoice.id, updateObject)
@@ -67,7 +59,6 @@ class Income extends React.Component {
 
     render() {
         const { invoices } = this.props;
-        let data = invoices;
         let amountReceived = 0;
         let amountPending = 0;
         let amountTotal = 0;
@@ -90,7 +81,7 @@ class Income extends React.Component {
 
         return (
             <div className='custom-container income-layout'>
-                <CsvDownload className='download-button' data={data} ><i className="bi bi-download"></i> Download</CsvDownload>
+                <CsvDownload className='download-button' data={invoices} ><i className="bi bi-download"></i> Download</CsvDownload>
                 <br/><br/>
                     <div className='box'>
                         <div style={{padding: "1%"}}>

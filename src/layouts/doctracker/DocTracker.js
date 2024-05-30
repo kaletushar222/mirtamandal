@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import {updateDocTracker} from '../../api/DocTrackerApi';
+import { getDocTracker } from '../../api/DocTrackerApi';
 
 class DocTracker extends React.Component {
 
@@ -12,6 +13,29 @@ class DocTracker extends React.Component {
             docTrackerObj: {},
             docTrackerUpdated: false
         }
+    };
+
+    //lifecycle methods
+    componentDidMount(){
+        this.getDocTracker()
+    };
+    
+    //api calls
+    getDocTracker = () =>{
+        const that = this
+        getDocTracker()
+            .then((response) => {
+                that.setState({
+                    docTrackerObj: response[0]
+                })
+            })    
+            .catch((err) => {
+                console.log(err)
+                that.setState({
+                    showToast: true,
+                    toastMessage: "Error in fetching data"
+                })
+            });
     };
 
     handleDocTrackerUpdate = (e) => {

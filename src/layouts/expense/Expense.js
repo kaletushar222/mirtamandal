@@ -7,18 +7,11 @@ import utils from '../../utils/utils';
 import { getInvoice } from '../../api/InvoiceApi';
 
 class Expense extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            expenses: [],
-            invoices: []
-        };
-    }
 
     //lifecycle methods
     componentDidMount(){
+        this.getInvoices();
         this.getExpenses();
-        this.getInvoices()
     }
     
 
@@ -30,9 +23,6 @@ class Expense extends React.Component {
             .then((response) => {
                 console.log("response", response.data);
                 that.props.setExpenses(response.data);
-                that.setState({
-                    expenses: response.data
-                });
             })    
             .catch((err) => {
                 console.log(err);
@@ -76,9 +66,6 @@ class Expense extends React.Component {
         getInvoice()
             .then((response) => {
                 that.props.setInvoices(response.data);
-                that.setState({
-                    invoices: response.data
-                });
             })    
             .catch((err) => {
                 console.log(err)
@@ -90,7 +77,7 @@ class Expense extends React.Component {
     }
 
     render() {
-        const { expenses, invoices } = this.state;
+        const { expenses, invoices } = this.props;
         let amountSpent = 0;
         let amountRemaining = 0;
         console.log(expenses);
@@ -103,13 +90,15 @@ class Expense extends React.Component {
 
         let amountReceived = 0;
 
-        invoices.forEach((inv)=>{
-            if(inv.status === "ACTIVE"){
-                if(!inv.isPending){
-                    amountReceived = amountReceived + inv.amount;
+        if (invoices && invoices.length > 0 ){
+            invoices.forEach((inv)=>{
+                if(inv.status === "ACTIVE"){
+                    if(!inv.isPending){
+                        amountReceived = amountReceived + inv.amount;
+                    }
                 }
-            }
-        })
+            })
+        }
 
 
         amountReceived = Math.round(amountReceived);
